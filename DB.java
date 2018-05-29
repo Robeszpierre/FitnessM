@@ -71,7 +71,7 @@ public class DB {
             ResultSet rs = dbmd.getTables(null, "APP", "LEASE", null);
             if(!rs.next())
             {
-                createStatement.execute("create table lease(customer_ID INT not null, ticket_ID int not null primary key GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), startDate date not null, endDate date not null)");
+                createStatement.execute("create table lease(customer_ID INT not null, ticket_ID int not null, startDate date not null, endDate date not null)");
                 System.out.println("létrehozva lease");
             }
         } catch (SQLException ex) {
@@ -159,9 +159,6 @@ public class DB {
             System.out.println("Valami baj a napi eladás hozzáadásakor");
             System.out.println(""+ex);
         }
-
-
-
     }
 
     public ArrayList<Customer> getCustomers(){
@@ -198,5 +195,25 @@ public class DB {
             System.out.println(""+ex);
         }
         return leases;
+    }
+
+
+    public void addNewLease(int customerID, int tickedID, String startDate, String endDate) {
+        try {
+            String sql = "insert into LEASE (CUSTOMER_ID, TICKET_ID, STARTDATE, ENDDATE) values (?, ?, ?, ?)";
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, customerID);
+            preparedStatement.setInt(2, tickedID);
+            preparedStatement.setString(3, startDate);
+            preparedStatement.setString(4, endDate);
+            System.out.println("sikeresen hozzaadtuk a datumot");
+            preparedStatement.execute();
+        } catch (SQLException ex) {
+            System.out.println("Valami baj a napi eladás hozzáadásakor");
+            System.out.println(""+ex);
+        }
+
+
+
     }
 }

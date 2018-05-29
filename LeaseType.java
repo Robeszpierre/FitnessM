@@ -19,16 +19,12 @@ public class LeaseType {
         this.price = new SimpleStringProperty(String.valueOf(price));
     }
 
-    public SimpleStringProperty idProperty() {
-        return id;
+    public String getId() {
+        return id.get();
     }
 
     public String getType() {
         return type.get();
-    }
-
-    public SimpleStringProperty typeProperty() {
-        return type;
     }
 
     public String getPrice() {
@@ -37,5 +33,10 @@ public class LeaseType {
 
     public SimpleStringProperty priceProperty() {
         return price;
+    }
+
+    @Override
+    public String toString(){
+        return (getType());
     }
 }

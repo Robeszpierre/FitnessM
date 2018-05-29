@@ -17,6 +17,8 @@ import javafx.scene.layout.StackPane;
 import javafx.util.Callback;
 
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class ViewController implements Initializable {
@@ -73,11 +75,17 @@ public class ViewController implements Initializable {
     Spinner<Integer> dailyTicketQuantity;
     @FXML
     Button sellTicket;
+    @FXML
+    Button sellLeaseButton;
+    @FXML
+    Label outdateLabel;
 
     DB db=new DB();
 
     Customer actualCustomer=null;
     String actualTicketType=null;
+
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     private final String LEASES = "Bérletek";
     private final String VALID = "Érvényesség/kulcskiadás";
@@ -182,6 +190,7 @@ public class ViewController implements Initializable {
                             statistic.setVisible(false);
 
                             validPane.setVisible(false);
+                            clearLeaseSale();
                             break;
                         case TICKETS:
                             valid.setVisible(false);
@@ -359,6 +368,13 @@ public class ViewController implements Initializable {
             actualCustomer = (Customer) customerTable.getSelectionModel().getSelectedItem();
             actualCustomerName.setText(actualCustomer.getName());
             actualCustomerName2.setText(actualCustomer.getName());
+
+
+    }
+
+    @FXML
+    public void enableSellLeaseButton(){
+            sellLeaseButton.setDisable(false);
     }
 
     public void getCustomerName() {
@@ -384,11 +400,74 @@ public class ViewController implements Initializable {
         }
     }
 
+
+    public void sellLease(){
+        mainFrame.setOpacity(0.3);
+
+        LeaseType l= (LeaseType) leaseType.getSelectionModel().getSelectedItem();
+        Customer c= (Customer) customerTable.getSelectionModel().getSelectedItem();
+        String startDate=null;
+        String endDate=null;
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Bérleteladás");
+        alert.setHeaderText("Biztosan " + l.getType() + " bérletet szeretnél eladni "+ actualCustomerName2.getText() +" nevű vendégnek?");
+        ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Igen");
+        ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("Mégse");
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.get() == ButtonType.OK){
+            Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+            Calendar cal = Calendar.getInstance();
+            startDate=dateFormat.format(cal.getTime());
+            endDate=calculateEndDate(l.getId(), cal);
+
+            db.addNewLease(Integer.parseInt(c.getCustomerID()), Integer.parseInt(l.getId()), startDate, endDate);
+
+            alert2.setTitle("Sikeres bérleteladás!");
+            alert2.setHeaderText(null);
+            alert2.setContentText("A fizetendő összeg: "+  l.getPrice()+ " Ft");
+
+            alert2.showAndWait();
+            clearLeaseSale();
+            mainFrame.setOpacity(1);
+        } else {
+            mainFrame.setOpacity(1);
+        }
+    }
+
+    private String calculateEndDate(String id, Calendar cal) {
+        String endDate=null;
+        switch (Integer.parseInt(id)){
+            case 1:
+                cal.add(cal.DATE, 30);
+                endDate=dateFormat.format(cal.getTime());
+                break;
+            case 2:
+                cal.add(cal.DATE, 60);
+                endDate=dateFormat.format(cal.getTime());
+                break;
+            case 3:
+            case 4:
+            case 5:
+                cal.add(cal.DATE, 365);
+                endDate=dateFormat.format(cal.getTime());
+                break;
+        }
+        System.out.println(endDate);
+        return endDate;
+    }
+
     private void refreshCustomerDatea(){
         //get data from database
         customerData.addAll(db.getCustomers());
         //add database data to the table
         customerTable.setItems(customerData);
+    }
+
+    public void clearLeaseSale(){
+        sellLeaseButton.setDisable(true);
+        leaseType.getSelectionModel().clearSelection();
     }
     //end Leases **********************************************************
 
@@ -406,8 +485,8 @@ public class ViewController implements Initializable {
         alert.setHeaderText("Biztosan " + dailyTicketQuantity.getValue() + " db " + ticketType.getSelectionModel().getSelectedItem() + " jegyet szeretnél eladni?");
         ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Igen");
         ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("Mégse");
-
         Optional<ButtonType> result = alert.showAndWait();
+
         if (result.get() == ButtonType.OK){
             int price=getTicketPrice();
             db.sellDailyTicket(price, actualTicketType);
