@@ -1,0 +1,18 @@
+#mankeys .button, #womankeys .button{
+    -fx-background-radius: 10em;
+    -fx-min-width: 200px;
+    -fx-min-height: 200px;
+    -fx-max-width: 200px;
+    -fx-max-height: 200px;
+    -fx-background-insets: 30px;
+    -fx-background-color: #a2dd5f;
+    -fx-border-color: black;
+}
+
+#custromerList .list-cell{
+    -fx-font-size: 15px;
+}
+
+.button{
+    -fx-background-radius: 5em;
+}

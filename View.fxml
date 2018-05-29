@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<SplitPane id="mainFrame" fx:id="mainFrame" dividerPositions="0.10246227164416204" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="658.0" prefWidth="1261.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FintessM.ViewController">
+  <items>
+    <AnchorPane maxWidth="300.0" minWidth="-Infinity" prefHeight="226.0" prefWidth="175.0" SplitPane.resizableWithParent="false">
+         <children>
+            <StackPane id="menupane" fx:id="menupane" prefHeight="326.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+         </children></AnchorPane>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+         <children>
+            <StackPane id="valid" fx:id="valid" prefHeight="656.0" prefWidth="1103.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <SplitPane dividerPositions="0.21071752951861944" layoutY="7.0" prefHeight="656.0" prefWidth="1103.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <items>
+                            <AnchorPane maxWidth="250.0" minHeight="0.0" minWidth="250.0" prefHeight="160.0" prefWidth="250.0">
+                                 <children>
+                                    <TableView id="customerTable" fx:id="customerTable" layoutX="12.0" layoutY="45.0" maxWidth="250.0" minWidth="-Infinity" onMouseClicked="#clickItem" prefHeight="554.0" prefWidth="250.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                 </children>
+                              </AnchorPane>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <StackPane id="leaseSell" fx:id="leaseSell" layoutX="59.0" layoutY="307.0" prefHeight="234.0" prefWidth="772.0" visible="false">
+                                       <children>
+                                          <Pane prefHeight="251.0" prefWidth="359.0">
+                                             <children>
+                                                <Label layoutX="28.0" layoutY="20.0" prefHeight="30.0" text="Vásárló neve:" />
+                                                <TextField id="actualCustomerName2" fx:id="actualCustomerName2" editable="false" layoutX="116.0" layoutY="20.0" prefHeight="30.0" prefWidth="172.0" />
+                                                <Label layoutX="28.0" layoutY="66.0" prefHeight="30.0" text="Bérlet típusa:" />
+                                                <Button layoutX="73.0" layoutY="117.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="137.0" text="Eladás" />
+                                                <Label id="nameLabel" fx:id="nameLabel" layoutX="300.0" layoutY="27.0" text="Válaszd ki a vendég nevét a listából vagy add hozzá az új vendéget a listához!" textFill="#f80d0d" />
+                                                <Button id="addNewCustomer" fx:id="addNewCustomer" layoutX="524.0" layoutY="117.0" mnemonicParsing="false" onMouseClicked="#getCustomerName" prefHeight="40.0" prefWidth="234.0" text="Új vendég hozzáadása a listához" />
+                                                <ComboBox id="leaseType" fx:id="leaseType" layoutX="116.0" layoutY="69.0" prefHeight="30.0" prefWidth="172.0" promptText="Válassz!" />
+                                             </children>
+                                          </Pane>
+                                       </children>
+                                    </StackPane>
+                                    <Pane id="validPane" fx:id="validPane" layoutY="4.0" prefHeight="301.0" prefWidth="545.0">
+                                       <children>
+                                          <Label layoutX="15.0" layoutY="75.0" text="Bérlet lejárati dátuma:">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="15.0" layoutY="117.0" text="Hátralevő alkalmak száma:">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                             <padding>
+                                                <Insets right="10.0" />
+                                             </padding>
+                                          </Label>
+                                          <Label layoutX="14.0" layoutY="159.0" text="Érvényesség:">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                             <padding>
+                                                <Insets right="10.0" />
+                                             </padding>
+                                          </Label>
+                                          <Circle fill="#b5ee87" layoutX="127.0" layoutY="170.0" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
+                                          <Label layoutX="12.0" layoutY="245.0" text="Kiadni kívánt kulcs száma:">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <Spinner id="keyNumber" initialValue="1" layoutX="197.0" layoutY="243.0" max="28" min="1" prefHeight="25.0" prefWidth="55.0" />
+                                          <ComboBox id="dressingRoomType" fx:id="dressingRoomType" layoutX="268.0" layoutY="243.0" prefWidth="150.0" promptText="Öltöző típusa" />
+                                          <Button layoutX="431.0" layoutY="243.0" mnemonicParsing="false" text="Kulcs kiadása" />
+                                          <Label layoutX="209.0" layoutY="75.0" text="2018 06. 15.">
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="213.0" layoutY="117.0" prefHeight="21.0" prefWidth="23.0" text="6">
+                                             <font>
+                                                <Font name="System Bold" size="15.0" />
+                                             </font>
+                                          </Label>
+                                          <Label id="actualCustomerName" fx:id="actualCustomerName" layoutX="15.0" layoutY="14.0" prefHeight="43.0" prefWidth="522.0" text="Minta János">
+                                             <font>
+                                                <Font size="29.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </Pane>
+                                 </children></AnchorPane>
+                          </items>
+                        </SplitPane>
+                        <TextField layoutX="59.0" layoutY="630.0" prefHeight="30.0" prefWidth="172.0" AnchorPane.bottomAnchor="35.0" />
+                        <Label layoutX="6.0" layoutY="634.0" prefHeight="30.0" text="Keresés:" AnchorPane.bottomAnchor="35.0">
+                           <padding>
+                              <Insets right="10.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children></StackPane>
+            <StackPane id="otherSells" fx:id="otherSells" prefHeight="656.0" prefWidth="1078.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0">
+                           <children>
+                              <Label prefHeight="30.0" text="Megnevezés:">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <TextField prefHeight="30.0" promptText="Terembérlés/Tetkó" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                           <children>
+                              <Label prefHeight="30.0" text="Összeg">
+                                 <HBox.margin>
+                                    <Insets right="14.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <Spinner amountToStepBy="1000" initialValue="1000" max="100000000" min="1" prefHeight="25.0" prefWidth="120.0" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0">
+                           <children>
+                              <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="122.0" text="Bevitel">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </StackPane>
+            <StackPane id="tickets" fx:id="tickets" prefHeight="656.0" prefWidth="1103.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0">
+                           <children>
+                              <ComboBox id="ticketType" fx:id="ticketType" onAction="#activateTicketButton" prefWidth="150.0" promptText="Jegy típusa" />
+                           </children></HBox>
+                        <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                           <children>
+                              <Label text="Darabszáma:">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                               <Spinner id="dailyTicketQuantity" fx:id="dailyTicketQuantity" amountToStepBy="1" editable="true" max="100" min="1" prefHeight="25.0" prefWidth="58.0" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                           <children>
+                              <Button id="sellTicket" fx:id="sellTicket" disable="true" mnemonicParsing="false" onAction="#sellDailyTicket" prefHeight="40.0" text="Jegy eladása" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children></StackPane>
+            <StackPane id="productSell" fx:id="productSell" prefHeight="656.0" prefWidth="1103.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" StackPane.alignment="CENTER">
+                     <children>
+                        <VBox alignment="CENTER" layoutX="452.0" layoutY="128.0" prefHeight="656.0" prefWidth="1103.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0">
+                                 <children>
+                                    <Label prefHeight="30.0" text="Termék neve:" textAlignment="RIGHT">
+                                       <HBox.margin>
+                                          <Insets right="47.0" />
+                                       </HBox.margin></Label>
+                                    <ChoiceBox prefHeight="30.0" prefWidth="150.0" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0">
+                                 <children>
+                                    <Label prefHeight="30.0" text="Termék darabszáma:" textAlignment="RIGHT">
+                                       <HBox.margin>
+                                          <Insets right="50.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Spinner id="productAmount" fx:id="productAmount" editable="true" initialValue="1" max="1000" min="0" prefHeight="30.0" prefWidth="66.0">
+                                       <HBox.margin>
+                                          <Insets right="45.0" />
+                                       </HBox.margin></Spinner>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="20.0" top="20.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="135.0" text="Eladás" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+               </children></StackPane>
+            <StackPane id="storage" fx:id="storage" prefHeight="656.0" prefWidth="1103.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <AnchorPane id="tableAnchor" fx:id="tableAnchor">
+                     <children>
+                        <TableView id="productsTable" fx:id="productsTable" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <placeholder>
+                              <Label text="Nincs adat" />
+                           </placeholder>
+                        </TableView>
+                        <HBox alignment="CENTER" layoutX="37.0" layoutY="586.0" prefHeight="30.0" prefWidth="200.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                           <children>
+                              <Label prefHeight="30.0" prefWidth="75.0" text="Termék neve" />
+                              <ChoiceBox prefWidth="150.0">
+                                 <HBox.margin>
+                                    <Insets right="20.0" />
+                                 </HBox.margin></ChoiceBox>
+                              <Label prefHeight="30.0" prefWidth="79.0" text="Mennyisége">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </Label>
+                              <TextField prefHeight="30.0" prefWidth="46.0">
+                                 <HBox.margin>
+                                    <Insets right="20.0" />
+                                 </HBox.margin></TextField>
+                              <Button id="addNewProduct" fx:id="ProductToStorage" mnemonicParsing="false" prefHeight="30.0" prefWidth="171.0" text="Hozzáadás az árukészlethez" />
+                              <Label prefHeight="30.0" prefWidth="75.0" text="Termék neve">
+                                 <HBox.margin>
+                                    <Insets left="200.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <TextField prefHeight="30.0">
+                                 <HBox.margin>
+                                    <Insets right="20.0" />
+                                 </HBox.margin>
+                              </TextField>
+                              <Label prefHeight="30.0" prefWidth="36.0" text="Ára:" />
+                              <TextField prefHeight="30.0" prefWidth="74.0">
+                                 <HBox.margin>
+                                    <Insets right="20.0" />
+                                 </HBox.margin>
+                              </TextField>
+                              <Label prefHeight="30.0" text="Limit" />
+                              <TextField prefHeight="30.0" prefWidth="31.0">
+                                 <HBox.margin>
+                                    <Insets left="10.0" right="10.0" />
+                                 </HBox.margin>
+                              </TextField>
+                              <Button id="addNewProduct" fx:id="addNewProduct" mnemonicParsing="false" prefHeight="30.0" prefWidth="133.0" text="Új termék hozzáadása">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </Button>
+                           </children></HBox>
+                     </children></AnchorPane>
+               </children></StackPane>
+            <StackPane id="mankeys" fx:id="mankeys" layoutY="-3.0" prefHeight="656.0" prefWidth="1103.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <FlowPane id="mwkeysflow" fx:id="mkeysflow" prefHeight="200.0" prefWidth="200.0" />
+               </children></StackPane>
+            <StackPane id="womankeys" fx:id="womankeys" prefHeight="656.0" prefWidth="1103.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <FlowPane id="wkeysflow" fx:id="wkeysflow" prefHeight="200.0" prefWidth="200.0" />
+               </children></StackPane>
+            <StackPane id="statistic" fx:id="statistic" layoutX="149.0" layoutY="100.0" prefHeight="656.0" prefWidth="1078.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+               </children>
+            </StackPane>
+         </children></AnchorPane>
+  </items>
+</SplitPane>
