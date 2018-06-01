@@ -1,5 +1,7 @@
 package FintessM;
 
+import javafx.scene.control.Alert;
+
 import java.sql.*;
 
 import java.sql.Connection;
@@ -26,7 +28,7 @@ public class DB {
     Statement createStatement = null;
     DatabaseMetaData dbmd = null;
 
-
+    //create DB
     public DB() {
         //Megpróbáljuk életre kelteni
         try {
@@ -71,7 +73,7 @@ public class DB {
             ResultSet rs = dbmd.getTables(null, "APP", "LEASE", null);
             if(!rs.next())
             {
-                createStatement.execute("create table lease(customer_ID INT not null, ticket_ID int not null, startDate date not null, endDate date not null)");
+                createStatement.execute("create table lease(lease_ID int not null primary key GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1) ,customer_ID INT not null, ticket_ID int not null, startDate date not null, endDate date not null, remaining_time int)");
                 System.out.println("létrehozva lease");
             }
         } catch (SQLException ex) {
@@ -101,7 +103,7 @@ public class DB {
             ResultSet rs = dbmd.getTables(null, "APP", "KEYS", null);
             if(!rs.next())
             {
-                createStatement.execute("create table keys(customer_ID INT primary key not null, key_number int not null)");
+                createStatement.execute("create table keys(key_holder varchar(30) not null, key_number int unique not null)");
                 System.out.println("létrehozva keys" +
                         "");
             }
@@ -198,22 +200,75 @@ public class DB {
     }
 
 
-    public void addNewLease(int customerID, int tickedID, String startDate, String endDate) {
+    public void addNewLease(int customerID, int tickedID, String startDate, String endDate, int remainingTime, int price, String name) {
         try {
-            String sql = "insert into LEASE (CUSTOMER_ID, TICKET_ID, STARTDATE, ENDDATE) values (?, ?, ?, ?)";
+            String sql = "insert into LEASE (CUSTOMER_ID, TICKET_ID, STARTDATE, ENDDATE, REMAINING_TIME) values (?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setInt(1, customerID);
             preparedStatement.setInt(2, tickedID);
             preparedStatement.setString(3, startDate);
             preparedStatement.setString(4, endDate);
-            System.out.println("sikeresen hozzaadtuk a datumot");
+            preparedStatement.setInt(5, remainingTime);
+            System.out.println("sikeresen hozzaadtuk a berletet");
+            preparedStatement.execute();
+
+            sql = "insert into INCOME (INCOME_NAME, PRICE, SELLDATE) values (?, ?, CURRENT_DATE)";
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, name);
+            preparedStatement.setInt(2, price);
+            System.out.println("sikeresen hozzaadtuk a berletet a bejövő jövedelemhez");
             preparedStatement.execute();
         } catch (SQLException ex) {
-            System.out.println("Valami baj a napi eladás hozzáadásakor");
+            System.out.println("Valami baj a bérlet eladásakor");
             System.out.println(""+ex);
         }
+    }
 
+    public Lease getGymValid(String customerID, int leaseID) {
+        String sql = "select * from lease\n" +
+                "        where customer_id="+customerID+" and ticket_id="+leaseID+" and ENDDATE>=CURRENT_DATE and STARTDATE<=CURRENT_DATE and remaining_time>0\n" +
+                "        order by enddate fetch first row only";
+        Lease lease = null;
+        try {
+            ResultSet rs = createStatement.executeQuery(sql);
+            rs.next();
+            lease = new Lease(rs.getInt("lease_id"),rs.getInt("customer_id"),rs.getInt("ticket_id"),rs.getString("STARTDATE"),rs.getString("ENDDATE"),rs.getString("REMAINING_TIME"));
+        } catch (SQLException ex) {
+            //nincs érvényes bérlet
+        }
+        return lease;
+    }
 
+    public void addKeyHolder(String name, int actualKey) throws Exception {
+        String sql = "insert into KEYS (KEY_HOLDER, KEY_NUMBER) values (?, ?)";
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, name);
+            preparedStatement.setInt(2, actualKey);
+            preparedStatement.execute();
+        }
+        catch (SQLException e) {
+            throw new Exception();
+        }
+    }
 
+    public void minusCount(int leaseID) {
+        try {
+            String sql = "update lease set REMAINING_TIME = REMAINING_TIME-1 where LEASE_ID=?";
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, leaseID);
+            preparedStatement.execute();
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("-1 alkalom");
+            alert.setHeaderText(null);
+            alert.setContentText("Sikeresen levontunk 1 alkalmat!");
+
+            alert.showAndWait();
+        } catch (SQLException ex) {
+            System.out.println("nem sikerült levonni 1 napot");
+            System.out.println(""+ex);
+        }
     }
 }
