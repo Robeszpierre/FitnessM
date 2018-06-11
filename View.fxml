@@ -2,11 +2,13 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -18,7 +20,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane id="mainFrame" fx:id="mainFrame" dividerPositions="0.10246227164416204" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="658.0" prefWidth="1261.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FintessM.ViewController">
+<SplitPane id="mainFrame" fx:id="mainScene" dividerPositions="0.10246227164416204" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="658.0" prefWidth="1261.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FintessM.ViewController">
   <items>
     <AnchorPane maxWidth="300.0" minWidth="-Infinity" prefHeight="226.0" prefWidth="175.0" SplitPane.resizableWithParent="false">
          <children>
@@ -34,7 +36,7 @@
                           <items>
                             <AnchorPane maxWidth="250.0" minHeight="0.0" minWidth="250.0" prefHeight="160.0" prefWidth="250.0">
                                  <children>
-                                    <TableView id="customerTable" fx:id="customerTable" layoutX="12.0" layoutY="45.0" maxWidth="250.0" minWidth="-Infinity" prefHeight="554.0" prefWidth="250.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <TableView id="customerTable" fx:id="customerTable" layoutX="12.0" layoutY="45.0" maxWidth="250.0" minWidth="250.0" prefHeight="554.0" prefWidth="250.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <placeholder>
                                           <Label text="Nincs találat" />
                                        </placeholder>
@@ -43,29 +45,7 @@
                               </AnchorPane>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                  <children>
-                                    <StackPane id="leaseSell" fx:id="leaseSell" layoutX="59.0" layoutY="307.0" prefHeight="234.0" prefWidth="772.0" visible="false">
-                                       <children>
-                                          <Pane prefHeight="251.0" prefWidth="359.0">
-                                             <children>
-                                                <Label layoutX="28.0" layoutY="20.0" prefHeight="30.0" text="Vásárló neve:">
-                                                   <font>
-                                                      <Font size="15.0" />
-                                                   </font></Label>
-                                                <Label layoutX="28.0" layoutY="66.0" prefHeight="30.0" text="Bérlet típusa:" />
-                                                <Button id="sellLeaseButton" fx:id="sellLeaseButton" disable="true" layoutX="73.0" layoutY="117.0" mnemonicParsing="false" onAction="#sellLease" prefHeight="40.0" prefWidth="137.0" text="Eladás" />
-                                                <Label id="nameLabel" fx:id="nameLabel" layoutX="386.0" layoutY="27.0" text="Válaszd ki a vendég nevét a listából vagy add hozzá az új vendéget a listához!" textFill="#f80d0d" />
-                                                <Button id="addNewCustomer" fx:id="addNewCustomer" layoutX="524.0" layoutY="117.0" mnemonicParsing="false" onMouseClicked="#getCustomerName" prefHeight="40.0" prefWidth="234.0" text="Új vendég hozzáadása a listához" />
-                                                <ComboBox id="leaseType" fx:id="leaseType" layoutX="116.0" layoutY="69.0" onAction="#enableSellLeaseButton" prefHeight="30.0" prefWidth="172.0" promptText="Válassz!" />
-                                                <Label id="actualCustomerName2" fx:id="actualCustomerName2" layoutX="125.0" layoutY="20.0" prefHeight="30.0" prefWidth="250.0" style="-fx-font-weight: bold;">
-                                                   <font>
-                                                      <Font size="15.0" />
-                                                   </font>
-                                                </Label>
-                                             </children>
-                                          </Pane>
-                                       </children>
-                                    </StackPane>
-                                    <Pane id="validPane" fx:id="validPane" layoutY="4.0" prefHeight="301.0" prefWidth="737.0" visible="false">
+                                    <Pane id="validPane" fx:id="validPane" layoutY="4.0" prefHeight="301.0" prefWidth="737.0">
                                        <children>
                                           <Label layoutX="382.0" layoutY="108.0" text="Szoli">
                                              <font>
@@ -75,21 +55,21 @@
                                                 <Insets right="10.0" />
                                              </padding>
                                           </Label>
-                                          <Circle id="gymCircle" fx:id="gymCircle" fill="#b5ed87" layoutX="500.0" layoutY="75.0" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
+                                          <Circle id="gymCircle" fx:id="gymCircle" fill="#fb5856" layoutX="500.0" layoutY="75.0" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
                                           <Label layoutX="14.0" layoutY="277.0" prefHeight="30.0" text="Kiadni kívánt kulcs száma:">
                                              <font>
                                                 <Font size="15.0" />
                                              </font>
                                           </Label>
                                           <Spinner id="keyNumber" fx:id="keyNumber" editable="true" initialValue="1" layoutX="199.0" layoutY="275.0" max="28" min="1" prefHeight="30.0" prefWidth="55.0" />
-                                          <ComboBox id="dressingRoomType" fx:id="dressingRoomType" layoutX="270.0" layoutY="275.0" prefHeight="30.0" prefWidth="150.0" promptText="Öltöző típusa" />
-                                          <Button id="keyButton" fx:id="keyButton" disable="true" layoutX="433.0" layoutY="275.0" mnemonicParsing="false" onMouseClicked="#giveOutKey" prefHeight="30.0" text="Kulcs kiadása" />
+                                          <ComboBox id="dressingRoomType" fx:id="dressingRoomType" layoutX="355.0" layoutY="275.0" prefHeight="30.0" prefWidth="150.0" promptText="Válassz!" />
+                                          <Button id="keyButton" fx:id="keyButton" disable="true" layoutX="512.0" layoutY="275.0" mnemonicParsing="false" onMouseClicked="#giveOutKey" prefHeight="30.0" styleClass="shiny-orange" text="Kulcs kiadása" />
                                           <Label id="gymRemaining" fx:id="gymRemaining" layoutX="635.0" layoutY="65.0" prefHeight="21.0" prefWidth="120.0">
                                              <font>
                                                 <Font name="System Bold" size="15.0" />
                                              </font>
                                           </Label>
-                                          <Label id="actualCustomerName" fx:id="actualCustomerName" layoutX="14.0" layoutY="15.0" prefHeight="43.0" prefWidth="418.0" text="Minta János">
+                                          <Label id="actualCustomerName" fx:id="actualCustomerName" layoutX="14.0" layoutY="15.0" prefHeight="43.0" prefWidth="418.0" text="Még nincs 1 vendéged sem">
                                              <font>
                                                 <Font size="29.0" />
                                              </font>
@@ -119,8 +99,8 @@
                                                 <Insets right="10.0" />
                                              </padding>
                                           </Label>
-                                          <Circle id="saunaCircle" fx:id="saunaCircle" fill="#b5ee87" layoutX="500.0" layoutY="162.0" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
-                                          <Circle id="saltCircle" fx:id="saltCircle" fill="#b5ee87" layoutX="500.0" layoutY="203.0" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
+                                          <Circle id="saunaCircle" fx:id="saunaCircle" fill="#fb5856" layoutX="500.0" layoutY="162.0" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
+                                          <Circle id="saltCircle" fx:id="saltCircle" fill="#fb5856" layoutX="500.0" layoutY="203.0" radius="12.0" stroke="BLACK" strokeType="INSIDE" />
                                           <Label layoutX="455.0" layoutY="26.0" text="Érvényesség">
                                              <font>
                                                 <Font size="15.0" />
@@ -152,13 +132,50 @@
                                                 <Font name="System Bold" size="15.0" />
                                              </font>
                                           </Label>
-                                          <Button id="minusSalt" fx:id="minusSalt" layoutX="658.0" layoutY="188.0" mnemonicParsing="false" onMouseClicked="#minusSaltCount" prefHeight="30.0" prefWidth="120.0" text="-1 alkalom" />
-                                          <Label id="keyLabel" fx:id="keyLabel" layoutX="545.0" layoutY="279.0" text="Nincs érvényes bérlete!" textFill="RED" />
-                                          <Button id="minusGym" fx:id="minusGym" layoutX="658.0" layoutY="61.0" mnemonicParsing="false" onMouseClicked="#minusGymCount" prefHeight="30.0" prefWidth="120.0" text="-1 alkalom" />
-                                          <Button id="minusSolarium" fx:id="minusSolarium" layoutX="658.0" layoutY="104.0" mnemonicParsing="false" onMouseClicked="#minusSolariumCount" prefHeight="30.0" prefWidth="120.0" text="-1 alkalom" />
-                                          <Button id="minusSauna" fx:id="minusSauna" layoutX="658.0" layoutY="147.0" mnemonicParsing="false" onMouseClicked="#minusSaunaCount" prefHeight="30.0" prefWidth="120.0" text="-1 alkalom" />
+                                          <Button id="minusSalt" fx:id="minusSalt" layoutX="658.0" layoutY="188.0" mnemonicParsing="false" onMouseClicked="#minusSaltCount" prefHeight="30.0" prefWidth="120.0" styleClass="round-red" text="-1 alkalom" visible="false" />
+                                          <Label id="keyLabel" fx:id="keyLabel" layoutX="634.0" layoutY="284.0" text="Nincs érvényes bérlete!" textFill="RED" />
+                                          <Button id="minusGym" fx:id="minusGym" layoutX="658.0" layoutY="61.0" mnemonicParsing="false" onMouseClicked="#minusGymCount" prefHeight="30.0" prefWidth="120.0" styleClass="round-red" text="-1 alkalom" visible="false" />
+                                          <Button id="minusSolarium" fx:id="minusSolarium" layoutX="658.0" layoutY="104.0" mnemonicParsing="false" onMouseClicked="#minusSolariumCount" prefHeight="30.0" prefWidth="120.0" styleClass="round-red" text="-1 alkalom" visible="false" />
+                                          <Button id="minusSauna" fx:id="minusSauna" layoutX="658.0" layoutY="147.0" mnemonicParsing="false" onMouseClicked="#minusSaunaCount" prefHeight="30.0" prefWidth="120.0" styleClass="round-red" text="-1 alkalom" visible="false" />
+                                          <Label layoutX="272.0" layoutY="275.0" prefHeight="30.0" text="Öltöző típusa:" />
                                        </children>
                                     </Pane>
+                                    <StackPane id="leaseSell" fx:id="leaseSell" layoutX="59.0" layoutY="307.0" prefHeight="234.0" prefWidth="772.0" visible="false">
+                                       <children>
+                                          <Pane prefHeight="251.0" prefWidth="359.0">
+                                             <children>
+                                                <Label layoutX="28.0" layoutY="20.0" prefHeight="30.0" text="Vásárló neve:">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font></Label>
+                                                <Label layoutX="28.0" layoutY="66.0" prefHeight="30.0" text="Bérlet típusa:" />
+                                                <Button id="sellLeaseButton" fx:id="sellLeaseButton" disable="true" layoutX="86.0" layoutY="166.0" mnemonicParsing="false" onAction="#sellLease" prefHeight="40.0" prefWidth="137.0" styleClass="round-red" text="Eladás" />
+                                                <Label id="nameLabel" fx:id="nameLabel" layoutX="386.0" layoutY="27.0" text="Válaszd ki a vendég nevét a listából vagy add hozzá az új vendéget a listához!" textFill="#f80d0d" />
+                                                <Button id="addNewCustomer" fx:id="addNewCustomer" layoutX="524.0" layoutY="117.0" mnemonicParsing="false" onMouseClicked="#getCustomerName" prefHeight="40.0" prefWidth="234.0" styleClass="round-green" text="Új vendég hozzáadása a listához" />
+                                                <ComboBox id="leaseType" fx:id="leaseType" layoutX="116.0" layoutY="69.0" onAction="#enableSellLeaseButton" prefHeight="30.0" prefWidth="172.0" promptText="Válassz!" />
+                                                <Label id="actualCustomerName2" fx:id="actualCustomerName2" layoutX="125.0" layoutY="20.0" prefHeight="30.0" prefWidth="250.0" style="-fx-font-weight: bold;">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font>
+                                                </Label>
+                                                <DatePicker id="startDatePicker" fx:id="startDatePicker" layoutX="155.0" layoutY="125.0" />
+                                                <Label layoutX="28.0" layoutY="124.0" prefHeight="30.0" text="Érvényesség kezdete:">
+                                                   <padding>
+                                                      <Insets right="10.0" />
+                                                   </padding>
+                                                </Label>
+                                                <CheckBox id="contiLeaseCheckBox" fx:id="contiLeaseCheckBox" layoutX="302.0" layoutY="69.0" mnemonicParsing="false" onAction="#contiLeaseDatas" prefHeight="30.0" text="Contis kedvezmény">
+                                                   <opaqueInsets>
+                                                      <Insets />
+                                                   </opaqueInsets></CheckBox>
+                                                <Label id="contiLabel1" fx:id="contiLabel1" layoutX="446.0" layoutY="69.0" prefHeight="30.0" text="Törzsszám:" visible="false" />
+                                                <Spinner id="leaseReferenceNumber" fx:id="leaseReferenceNumber" editable="true" layoutX="509.0" layoutY="72.0" max="10000000" min="1" prefHeight="25.0" prefWidth="101.0" visible="false" />
+                                                <Label id="contiLabel2" fx:id="contiLabel2" layoutX="627.0" layoutY="76.0" text="Bérlet száma:" visible="false" />
+                                                <Spinner id="contiLeaseNumber" fx:id="contiLeaseNumber" editable="true" layoutX="707.0" layoutY="72.0" max="10000000" min="1" prefHeight="25.0" prefWidth="74.0" visible="false" />
+                                             </children>
+                                          </Pane>
+                                       </children>
+                                    </StackPane>
                                  </children></AnchorPane>
                           </items>
                         </SplitPane>
@@ -182,7 +199,7 @@
                                     <Insets right="10.0" />
                                  </HBox.margin>
                               </Label>
-                              <TextField prefHeight="30.0" promptText="Terembérlés/Tetkó" />
+                              <TextField id="otherProductName" fx:id="otherProductName" onKeyReleased="#activateOtherSellButton" prefHeight="30.0" promptText="Terembérlés/Tetkó" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0">
@@ -195,12 +212,12 @@
                                     <Insets right="14.0" />
                                  </HBox.margin>
                               </Label>
-                              <Spinner amountToStepBy="1000" initialValue="1000" max="100000000" min="1" prefHeight="25.0" prefWidth="120.0" />
+                              <Spinner id="otherProductAmount" fx:id="otherProductAmount" amountToStepBy="1000" editable="true" initialValue="1000" max="100000000" min="1" prefHeight="25.0" prefWidth="120.0" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0">
                            <children>
-                              <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="122.0" text="Bevitel">
+                              <Button id="otherProductSellButton" fx:id="otherProductSellButton" disable="true" mnemonicParsing="false" onMouseClicked="#sellOtherItem" prefHeight="40.0" prefWidth="122.0" styleClass="round-red" text="Bevitel">
                                  <HBox.margin>
                                     <Insets />
                                  </HBox.margin>
@@ -214,13 +231,39 @@
                   </VBox>
                </children>
             </StackPane>
-            <StackPane id="tickets" fx:id="tickets" prefHeight="656.0" prefWidth="1103.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <StackPane id="tickets" fx:id="tickets" prefHeight="656.0" prefWidth="1103.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
                         <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0">
                            <children>
-                              <ComboBox id="ticketType" fx:id="ticketType" onAction="#activateTicketButton" prefWidth="150.0" promptText="Jegy típusa" />
+                              <Label text="Jegy típusa:">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <ComboBox id="ticketType" fx:id="ticketType" onAction="#activateTicketButton" prefWidth="150.0" promptText="Válassz!">
+                                 <HBox.margin>
+                                    <Insets right="20.0" />
+                                 </HBox.margin></ComboBox>
+                              <CheckBox id="dailyConti" fx:id="dailyConti" mnemonicParsing="false" onAction="#dailyContiEnable" text="Contis kedvezmény" visible="false">
+                                 <HBox.margin>
+                                    <Insets right="20.0" />
+                                 </HBox.margin></CheckBox>
+                              <Label id="contiLabel" fx:id="contiLabel" text="Törzsszám:" visible="false">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin></Label>
+                              <Spinner id="dailyContiReference" fx:id="dailyContiReference" max="10000000" min="1" prefHeight="25.0" prefWidth="96.0" visible="false">
+                                 <HBox.margin>
+                                    <Insets right="20.0" />
+                                 </HBox.margin></Spinner>
+                              <Label id="contiTicketNumber" fx:id="contiTicketNumber" text="Jegy száma:" visible="false">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <Spinner id="dailyContiTicketNumber" fx:id="dailyContiTicketNumber" max="10000000" min="1" prefHeight="25.0" prefWidth="96.0" visible="false" />
                            </children></HBox>
                         <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0">
                            <VBox.margin>
@@ -240,7 +283,7 @@
                               <Insets top="20.0" />
                            </VBox.margin>
                            <children>
-                              <Button id="sellTicket" fx:id="sellTicket" disable="true" mnemonicParsing="false" onAction="#sellDailyTicket" prefHeight="40.0" text="Jegy eladása" />
+                              <Button id="sellTicket" fx:id="sellTicket" disable="true" mnemonicParsing="false" onAction="#sellDailyTicket" prefHeight="40.0" styleClass="round-red" text="Jegy eladása" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0" spacing="20.0">
@@ -251,8 +294,9 @@
                                  </font>
                               </Label>
                               <Spinner id="keyNumber2" fx:id="keyNumber2" editable="true" initialValue="1" max="28" min="1" prefHeight="30.0" prefWidth="55.0" />
-                              <ComboBox id="dressingRoomType2" fx:id="dressingRoomType2" prefHeight="30.0" prefWidth="150.0" promptText="Öltöző típusa" />
-                              <Button id="keyButton2" fx:id="keyButton2" mnemonicParsing="false" onMouseClicked="#giveOutKey2" prefHeight="30.0" text="Kulcs kiadása" />
+                              <Label prefHeight="30.0" text="Öltöző típusa" />
+                              <ComboBox id="dressingRoomType2" fx:id="dressingRoomType2" prefHeight="30.0" prefWidth="150.0" promptText="Válassz!" />
+                              <Button id="keyButton2" fx:id="keyButton2" mnemonicParsing="false" onMouseClicked="#giveOutKey2" prefHeight="30.0" styleClass="shiny-orange" text="Kulcs kiadása" />
                            </children>
                            <VBox.margin>
                               <Insets top="20.0" />
@@ -273,7 +317,7 @@
                                        <HBox.margin>
                                           <Insets right="47.0" />
                                        </HBox.margin></Label>
-                                    <ChoiceBox prefHeight="30.0" prefWidth="150.0" />
+                                    <ComboBox id="productList2" fx:id="productList2" onAction="#activateProductSellButton" prefHeight="30.0" prefWidth="150.0" promptText="Válassz!" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0">
@@ -292,7 +336,7 @@
                                     <Insets bottom="20.0" top="20.0" />
                                  </VBox.margin>
                               </HBox>
-                              <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="135.0" text="Eladás" />
+                              <Button id="productSellButton" fx:id="productSellButton" disable="true" mnemonicParsing="false" onMouseClicked="#productSell" prefHeight="40.0" prefWidth="135.0" styleClass="round-red" text="Eladás" />
                            </children>
                         </VBox>
                      </children>
@@ -309,62 +353,223 @@
                         </TableView>
                         <HBox alignment="CENTER" layoutX="37.0" layoutY="586.0" prefHeight="30.0" prefWidth="200.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
                            <children>
-                              <Label prefHeight="30.0" prefWidth="75.0" text="Termék neve" />
-                              <ChoiceBox prefWidth="150.0">
+                              <HBox styleClass="hboxHighlight">
+                                 <children>
+                                    <Label prefHeight="30.0" prefWidth="75.0" text="Termék neve:">
+                                       <HBox.margin>
+                                          <Insets right="10.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <ComboBox id="productList" fx:id="productList" prefWidth="150.0" promptText="Válassz!">
+                                       <HBox.margin>
+                                          <Insets right="20.0" />
+                                       </HBox.margin>
+                                    </ComboBox>
+                                    <Label prefHeight="30.0" prefWidth="79.0" text="Mennyisége">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </Label>
+                                    <TextField id="productQuantity" fx:id="productQuantity" prefHeight="30.0" prefWidth="46.0" promptText="10">
+                                       <HBox.margin>
+                                          <Insets right="20.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                    <Button id="addNewProduct" fx:id="ProductToStorage" mnemonicParsing="false" onMouseClicked="#addProductToStorage" styleClass="round-green" text="Hozzáadás az árukészlethez">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin></Button>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                                 </padding>
                                  <HBox.margin>
-                                    <Insets right="20.0" />
-                                 </HBox.margin></ChoiceBox>
-                              <Label prefHeight="30.0" prefWidth="79.0" text="Mennyisége">
-                                 <HBox.margin>
-                                    <Insets />
+                                    <Insets right="200.0" />
                                  </HBox.margin>
-                              </Label>
-                              <TextField prefHeight="30.0" prefWidth="46.0">
-                                 <HBox.margin>
-                                    <Insets right="20.0" />
-                                 </HBox.margin></TextField>
-                              <Button id="addNewProduct" fx:id="ProductToStorage" mnemonicParsing="false" prefHeight="30.0" prefWidth="171.0" text="Hozzáadás az árukészlethez" />
-                              <Label prefHeight="30.0" prefWidth="75.0" text="Termék neve">
-                                 <HBox.margin>
-                                    <Insets left="200.0" />
-                                 </HBox.margin>
-                              </Label>
-                              <TextField prefHeight="30.0">
-                                 <HBox.margin>
-                                    <Insets right="20.0" />
-                                 </HBox.margin>
-                              </TextField>
-                              <Label prefHeight="30.0" prefWidth="36.0" text="Ára:" />
-                              <TextField prefHeight="30.0" prefWidth="74.0">
-                                 <HBox.margin>
-                                    <Insets right="20.0" />
-                                 </HBox.margin>
-                              </TextField>
-                              <Label prefHeight="30.0" text="Limit" />
-                              <TextField prefHeight="30.0" prefWidth="31.0">
-                                 <HBox.margin>
-                                    <Insets left="10.0" right="10.0" />
-                                 </HBox.margin>
-                              </TextField>
-                              <Button id="addNewProduct" fx:id="addNewProduct" mnemonicParsing="false" prefHeight="30.0" prefWidth="133.0" text="Új termék hozzáadása">
-                                 <HBox.margin>
-                                    <Insets />
-                                 </HBox.margin>
-                              </Button>
+                              </HBox>
+                              <HBox styleClass="hboxHighlight">
+                                 <children>
+                                    <Label prefHeight="30.0" prefWidth="75.0" text="Termék neve:">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </Label>
+                                    <TextField id="productName" fx:id="productName" prefHeight="30.0" promptText="Terméknév">
+                                       <HBox.margin>
+                                          <Insets right="20.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                    <Label prefHeight="30.0" prefWidth="36.0" text="Ára:" />
+                                    <TextField id="productPrice" fx:id="productPrice" prefHeight="30.0" prefWidth="74.0" promptText="1000">
+                                       <HBox.margin>
+                                          <Insets right="20.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                    <Label prefHeight="30.0" text="Limit" />
+                                    <TextField id="productLimit" fx:id="productLimit" prefHeight="30.0" prefWidth="31.0" promptText="10">
+                                       <HBox.margin>
+                                          <Insets left="10.0" right="10.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                    <Button id="addNewProduct" fx:id="addNewProduct" mnemonicParsing="false" onMouseClicked="#addNewProduct" styleClass="round-green" text="Új termék hozzáadása">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                                 </padding></HBox>
                            </children></HBox>
                      </children></AnchorPane>
                </children></StackPane>
-            <StackPane id="mankeys" fx:id="mankeys" layoutY="-3.0" prefHeight="656.0" prefWidth="1103.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <StackPane id="mankeys" fx:id="mankeys" layoutY="-3.0" prefHeight="656.0" prefWidth="1078.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <FlowPane id="mwkeysflow" fx:id="mkeysflow" prefHeight="200.0" prefWidth="200.0" />
+                  <FlowPane id="mwkeysflow" fx:id="mkeysflow" prefHeight="659.0" prefWidth="1076.0" />
                </children></StackPane>
-            <StackPane id="womankeys" fx:id="womankeys" prefHeight="656.0" prefWidth="1103.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <StackPane id="womankeys" fx:id="womankeys" prefHeight="656.0" prefWidth="1078.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <FlowPane id="wkeysflow" fx:id="wkeysflow" prefHeight="200.0" prefWidth="200.0" />
+                  <FlowPane id="wkeysflow" fx:id="wkeysflow" prefWrapLength="0.0" />
                </children></StackPane>
             <StackPane id="statistic" fx:id="statistic" layoutX="149.0" layoutY="100.0" prefHeight="656.0" prefWidth="1078.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <VBox alignment="CENTER" layoutX="446.0" layoutY="191.0" prefHeight="656.0" prefWidth="1078.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Label text="Kasszában lévő összeg:">
+                                       <font>
+                                          <Font size="35.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets right="20.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Label id="currentCashLabel" fx:id="currentCashLabel">
+                                       <font>
+                                          <Font name="System Bold" size="30.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Label text="Aktuális napi bevétel:">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets right="20.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Label id="dailyIncomeLabel" fx:id="dailyIncomeLabel">
+                                       <font>
+                                          <Font name="System Bold" size="30.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Label text="Akuális havi bevétel:">
+                                       <HBox.margin>
+                                          <Insets right="20.0" />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font size="25.0" />
+                                       </font>
+                                    </Label>
+                                    <Label id="currentMonthIncomeLabel" fx:id="currentMonthIncomeLabel">
+                                       <font>
+                                          <Font name="System Bold" size="25.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Label text="Előző havi conti által fizetendő: ">
+                                       <font>
+                                          <Font size="25.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets right="20.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Label id="prevMonthConti" fx:id="prevMonthConti">
+                                       <HBox.margin>
+                                          <Insets right="20.0" />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font name="System Bold" size="25.0" />
+                                       </font>
+                                    </Label>
+                                    <Button mnemonicParsing="false" onMouseClicked="#createPDF" styleClass="round-green" text="Táblázat készítése" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Label id="lastMonthIncome" fx:id="lastMonthIncome" text="Előző havi bevétel:">
+                                       <HBox.margin>
+                                          <Insets right="20.0" />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <Label id="lastMonthIncomeLabel" fx:id="lastMonthIncomeLabel">
+                                       <font>
+                                          <Font name="System Bold" size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children></AnchorPane>
+               </children>
+            </StackPane>
+            <StackPane id="cancellation" fx:id="cancellation" prefHeight="656.0" prefWidth="1078.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <VBox alignment="CENTER" layoutX="111.0" layoutY="110.0" prefHeight="656.0" prefWidth="1078.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0">
+                                 <children>
+                                    <Label prefHeight="30.0" text="Sztornózni kívánt összeg:">
+                                       <HBox.margin>
+                                          <Insets right="20.0" />
+                                       </HBox.margin>
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Spinner id="cancellationAmount" fx:id="cancellationAmount" amountToStepBy="1000" editable="true" initialValue="1000" max="100000000" min="1" prefHeight="30.0" prefWidth="81.0" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" onMouseClicked="#cancellation" prefHeight="30.0" styleClass="round-red" text="Sztornózás" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets top="20.0" />
+                                 </VBox.margin></HBox>
+                           </children>
+                        </VBox>
+                     </children></AnchorPane>
+               </children>
+            </StackPane>
+            <StackPane id="incomeTable" fx:id="incomeTable" layoutX="139.0" layoutY="107.0" prefHeight="656.0" prefWidth="1078.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <TableView prefHeight="200.0" prefWidth="200.0">
+                    <columns>
+                      <TableColumn id="incomeName" prefWidth="171.0" text="Megnevezés" />
+                      <TableColumn id="incomeAmount" minWidth="6.0" prefWidth="166.0" text="Bevétel" />
+                    </columns>
+                  </TableView>
                </children>
             </StackPane>
          </children></AnchorPane>

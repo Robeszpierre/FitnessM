@@ -10,23 +10,32 @@ import javax.swing.text.View;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Locale;
 
 public class Main extends Application {
+
+    DB db=null;
 
     @Override
     public void start(Stage stage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("View.fxml"));
 
+        Locale.setDefault(new Locale("hu", "HUN"));
+
         Scene scene = new Scene(root);
         stage.setTitle("FitnessM");
-        stage.setWidth(1920);
-        stage.setHeight(1000);
+        stage.setMaximized(true);
         stage.setScene(scene);
 
         scene.getStylesheets().add(this.getClass().getResource("view.css").toExternalForm());
         stage.show();
 
-        DB db=new DB();
+        db=new DB();
+    }
+
+    @Override
+    public void stop(){
+        db.shutDownDB();
     }
 
 

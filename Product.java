@@ -2,15 +2,14 @@ package FintessM;
 
 import javafx.beans.property.SimpleStringProperty;
 
-public class Products {
-
+public class Product {
+    private final SimpleStringProperty id;
     private final SimpleStringProperty prductName;
     private final SimpleStringProperty productPrice;
     private final SimpleStringProperty productQuantity;
-    private final SimpleStringProperty id;
     private final SimpleStringProperty limit;
 
-    public Products() {
+    public Product() {
         this.prductName = new SimpleStringProperty("");
         this.productPrice = new SimpleStringProperty("");
         this.productQuantity = new SimpleStringProperty("");
@@ -18,20 +17,28 @@ public class Products {
         this.id = new SimpleStringProperty("");
     }
 
-    public Products(String prductName, String productPrice, String productQuantity, String limit) {
+    public Product(String prductName, Integer productPrice, Integer productQuantity, Integer limit) {
         this.prductName = new SimpleStringProperty(prductName);
-        this.productPrice = new SimpleStringProperty(productPrice);
-        this.productQuantity = new SimpleStringProperty(productQuantity);
-        this.limit = new SimpleStringProperty(limit);
+        this.productPrice = new SimpleStringProperty(String.valueOf(productPrice));
+        this.productQuantity = new SimpleStringProperty(String.valueOf(productQuantity));
+        this.limit = new SimpleStringProperty(String.valueOf(limit));
         this.id = new SimpleStringProperty("");
     }
 
-    public Products(Integer id, String prductName, String productPrice, String productQuantity, String limit) {
+    public Product(String prductName, Integer productPrice, Integer limit) {
         this.prductName = new SimpleStringProperty(prductName);
-        this.productPrice = new SimpleStringProperty(productPrice);
-        this.productQuantity = new SimpleStringProperty(productQuantity);
-        this.limit = new SimpleStringProperty(limit);
+        this.productPrice = new SimpleStringProperty(String.valueOf(productPrice));
+        this.productQuantity = new SimpleStringProperty("");
+        this.limit = new SimpleStringProperty(String.valueOf(limit));
+        this.id = new SimpleStringProperty("");
+    }
+
+    public Product(Integer id, String prductName, Integer productPrice, Integer productQuantity, Integer limit) {
         this.id = new SimpleStringProperty(String.valueOf(id));
+        this.prductName = new SimpleStringProperty(prductName);
+        this.productPrice = new SimpleStringProperty(String.valueOf(productPrice));
+        this.productQuantity = new SimpleStringProperty(String.valueOf(productQuantity));
+        this.limit = new SimpleStringProperty(String.valueOf(limit));
     }
 
     public String getPrductName() {

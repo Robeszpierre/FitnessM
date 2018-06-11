@@ -5,15 +5,101 @@
     -fx-max-width: 200px;
     -fx-max-height: 200px;
     -fx-background-insets: 30px;
-    -fx-background-color: #a2dd5f;
+    -fx-font-weight: bold;
+    -fx-font-size: 20px;
+    -fx-opacity: 0.8;
     -fx-border-color: black;
 }
 
-#custromerList .list-cell{
-    -fx-font-size: 15px;
+.disableKey{
+    -fx-background-color: #f9a4a4;
+}
+
+.disableKey:hover{
+    -fx-opacity: 1;
+    -fx-background-color: #ff2d2d;
+}
+
+
+.enableKey{
+    -fx-background-color: #b7f9a4;
+}
+
+.enableKey:hover{
+    -fx-opacity: 1;
+    -fx-background-color: #68ff3d;
+}
+
+#customerTable .table-cell{
+    -fx-font-weight: bold;
 }
 
 .button{
     -fx-background-radius: 5em;
+}
+
+#productsTable .table-cell{
+    -fx-alignment: CENTER;
+    -fx-font-weight: bold;
+}
+
+#productsTable .table-row-cell:selected .text {
+    -fx-fill: black ;
+}
+
+.shiny-orange {
+    -fx-background-color:
+            linear-gradient(#ffd65b, #e68400),
+            linear-gradient(#ffef84, #f2ba44),
+            linear-gradient(#ffea6a, #efaa22),
+            linear-gradient(#ffe657 0%, #f8c202 50%, #eea10b 100%),
+            linear-gradient(from 0% 0% to 15% 50%, rgba(255,255,255,0.9), rgba(255,255,255,0));
+    -fx-background-radius: 30;
+    -fx-background-insets: 0,1,2,3,0;
+    -fx-text-fill: #654b00;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-opacity: 0.7;
+}
+
+.shiny-orange:hover {
+    -fx-opacity: 1;
+}
+
+
+.round-red {
+    -fx-background-color: linear-gradient(#ff5638, #b73d28);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-opacity: 0.8;
+}
+
+.round-red:hover {
+     -fx-background-color: linear-gradient(#ff5400, #be1d00);
+    -fx-font-weight: bold;
+     -fx-opacity: 1;
+}
+
+.round-red:disabled {
+    -fx-background-color: linear-gradient(#ff5400, #be1d00);
+    -fx-font-weight: bold;
+    -fx-opacity: 0.2;
+}
+
+.round-green {
+    -fx-background-color: linear-gradient(#acff54, #6ea337);
+    -fx-text-fill: #040cf4;
+    -fx-font-weight: bold;
+    -fx-opacity: 0.8;
+}
+
+.round-green:hover {
+    -fx-background-color: linear-gradient(#acff54, #6ea337);
+    -fx-font-weight: bold;
+    -fx-opacity: 1;
+}
+
+.hboxHighlight{
+    -fx-background-color: #e0fffd;
 }
 
