@@ -277,31 +277,72 @@ public class ViewController implements Initializable {
             }
         });
         customerSearch();
-        keyNumber.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue) {
-                keyNumber.increment(0); // won't change value, but will commit editor
-            }
-        });
-        keyNumber2.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue) {
-                keyNumber2.increment(0); // won't change value, but will commit editor
-            }
-        });
-        cancellationAmount.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue) {
-                cancellationAmount.increment(0); // won't change value, but will commit editor
-            }
-        });
-        otherProductAmount.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue) {
-                otherProductAmount.increment(0); // won't change value, but will commit editor
-            }
-        });
-        productAmount.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue) {
-                otherProductAmount.increment(0); // won't change value, but will commit editor
-            }
-        });
+            keyNumber.focusedProperty().addListener((observable, oldValue, newValue) -> {
+                if (!newValue) {
+                    keyNumber.increment(0); // won't change value, but will commit editor
+                }
+            });
+            keyNumber2.focusedProperty().addListener((observable, oldValue, newValue) -> {
+                if (!newValue) {
+                    keyNumber2.increment(0); // won't change value, but will commit editor
+                }
+            });
+            cancellationAmount.focusedProperty().addListener((observable, oldValue, newValue) -> {
+                if (!newValue) {
+                    cancellationAmount.increment(0); // won't change value, but will commit editor
+                }
+            });
+            otherProductAmount.focusedProperty().addListener((observable, oldValue, newValue) -> {
+                if (!newValue) {
+                    otherProductAmount.increment(0); // won't change value, but will commit editor
+                }
+            });
+            productAmount.focusedProperty().addListener((observable, oldValue, newValue) -> {
+                if (!newValue) {
+                    otherProductAmount.increment(0); // won't change value, but will commit editor
+                }
+            });
+            dailyTicketQuantity.focusedProperty().addListener((observable, oldValue, newValue) -> {
+                if (!newValue) {
+                    dailyTicketQuantity.increment(0); // won't change value, but will commit editor
+                }
+            });
+            dailyContiReference.focusedProperty().addListener((observable, oldValue, newValue) -> {
+                if (!newValue) {
+                    try {
+                        dailyContiReference.increment(0); // won't change value, but will commit editor
+                    }catch (NumberFormatException e){
+                        notANumberAlert();
+                    }
+                }
+            });
+            dailyContiTicketNumber.focusedProperty().addListener((observable, oldValue, newValue) -> {
+                if (!newValue) {
+                    try {
+                        dailyContiTicketNumber.increment(0); // won't change value, but will commit editor
+                    }catch (NumberFormatException e){
+                        notANumberAlert();
+                    }
+                }
+            });
+            leaseReferenceNumber.focusedProperty().addListener((observable, oldValue, newValue) -> {
+                if (!newValue) {
+                    try {
+                        leaseReferenceNumber.increment(0); // won't change value, but will commit editor
+                    }catch (NumberFormatException e){
+                        notANumberAlert();
+                    }
+                }
+            });
+            contiLeaseNumber.focusedProperty().addListener((observable, oldValue, newValue) -> {
+                if (!newValue) {
+                    try {
+                        contiLeaseNumber.increment(0); // won't change value, but will commit editor
+                    }catch (NumberFormatException e){
+                        notANumberAlert();
+                    }
+                }
+            });
     }
 
     private void enableKeyButton() {
@@ -312,6 +353,15 @@ public class ViewController implements Initializable {
             keyButton.setDisable(true);
             keyLabel.setVisible(true);
         }
+    }
+
+    private void notANumberAlert(){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Hiba!");
+        alert.setHeaderText("");
+        alert.setContentText("Helytelenül kitöltött mező! számot adj meg!");
+
+        alert.showAndWait();
     }
 
     private void refreshCustomerTable(){
@@ -595,13 +645,14 @@ public class ViewController implements Initializable {
                     } else {
                         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                         alert.setTitle("Megerősítés");
+                        alert.setHeaderText("");
                         ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Igen");
                         ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("Nem");
                         String ownerName=k.getOwnerName();
                         if (button.getText().matches("1")) {
                             alert.setContentText("Biztosan visszahozta " + ownerName+ " az " + button.getText() + "-es kulcsot?");
                         } else if (button.getText().matches("5")) {
-                            alert.setContentText("Biztosan visszahozta " + ownerName + " az " + button.getText() + "5-ös kulcsot?");
+                            alert.setContentText("Biztosan visszahozta " + ownerName + " az " + button.getText() + "-ös kulcsot?");
                         } else if (button.getText().matches("3|13|23|8|18|28")) {
                             alert.setContentText("Biztosanvisszahozta " + ownerName + " a " + button.getText() + "-as kulcsot?");
                         } else if (button.getText().matches("15|25")) {
@@ -910,6 +961,11 @@ public class ViewController implements Initializable {
                 sellLeaseButton.setDisable(false);
                 if(l.getType().equals("szoli")){
                     contiLeaseCheckBox.setVisible(false);
+                    contiLeaseCheckBox.setSelected(false);
+                    leaseReferenceNumber.setVisible(false);
+                    contiLeaseNumber.setVisible(false);
+                    contiLabel1.setVisible(false);
+                    contiLabel2.setVisible(false);
                 }else {
                     contiLeaseCheckBox.setVisible(true);
                 }
@@ -1153,9 +1209,9 @@ public class ViewController implements Initializable {
                 }
                 System.out.println(ticketType);
 
-                System.out.println(contiLeaseNumber.getValue());
-                int leaseNumber=contiLeaseNumber.getValue();
-                int referenceNumber=leaseReferenceNumber.getValue();
+               int referenceNumber = leaseReferenceNumber.getValue();
+               int leaseNumber = contiLeaseNumber.getValue();
+
 
                 db.addConti(ticketType, leaseNumber, c.getName(), referenceNumber,discount, startDate);
             }
@@ -1300,9 +1356,18 @@ public class ViewController implements Initializable {
 
             } else {
                 dailyConti.setVisible(false);
+                dailyConti.setSelected(false);
+                contiLabel.setVisible(false);
+                dailyContiReference.setVisible(false);
+                contiTicketNumber.setVisible(false);
+                dailyContiTicketNumber.setVisible(false);
             }
         } catch (Exception e) {
             dailyConti.setVisible(false);
+            contiLabel.setVisible(false);
+            dailyContiReference.setVisible(false);
+            contiTicketNumber.setVisible(false);
+            dailyContiTicketNumber.setVisible(false);
         }
     }
 

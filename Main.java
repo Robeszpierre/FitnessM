@@ -6,10 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import javax.swing.text.View;
-import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+
 import java.util.Locale;
 
 public class Main extends Application {
@@ -21,6 +18,7 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("View.fxml"));
 
         Locale.setDefault(new Locale("hu", "HUN"));
+
 
         Scene scene = new Scene(root);
         stage.setTitle("FitnessM");
